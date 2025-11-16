@@ -1,0 +1,54 @@
+:root {
+    --primary: #3b82f6;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 50%, #f0fdf4 100%);
+    min-height: 100vh;
+}
+
+.header-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
+}
+
+.symptom-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+}
+
+.symptom-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.symptom-card.selected {
+    background: #eff6ff;
+    border-color: var(--primary) !important;
+    border-width: 2px !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.confidence-badge {
+    font-size: 1.5rem;
+    font-weight: bold;
+}

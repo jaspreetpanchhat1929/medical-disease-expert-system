@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Expert System - AI Diagnosis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header-gradient text-white py-4 shadow-lg">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-stethoscope fa-3x me-3"></i>
+                <div>
+                    <h1 class="mb-0">Smart Health Diagnosis System</h1>
+                    <p class="mb-0 opacity-75">AI-Powered Expert System for Early Disease Detection</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container my-5">
+        <div id="inputSection" class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4 border-start border-primary border-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-user-injured text-primary me-2"></i>
+                            Patient Information
+                        </h5>
+                        <input type="text" id="patientName" class="form-control form-control-lg" 
+                               placeholder="Enter patient name" required>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4 border-start border-success border-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-heartbeat text-success me-2"></i>
+                            Select Symptoms (<span id="symptomCount">0</span> selected)
+                        </h5>
+                        <div class="row" id="symptomsContainer">
+                            {% for id, symptom in symptoms.items() %}
+                            <div class="col-md-6 mb-3">
+                                <div class="symptom-card p-3 border rounded">
+                                    <div class="form-check">
+                                        <input class="form-check-input symptom-checkbox" 
+                                               type="checkbox" value="{{ id }}" id="symptom{{ id }}">
+                                        <label class="form-check-label w-100" for="symptom{{ id }}">
+                                            <strong>{{ symptom.name }}</strong><br>
+                                            <small class="text-muted">{{ symptom.description }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <button onclick="diagnoseDisease()" class="btn btn-primary btn-lg flex-grow-1">
+                        <i class="fas fa-stethoscope me-2"></i>Diagnose Disease
+                    </button>
+                    <button onclick="resetForm()" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-redo me-2"></i>Reset
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card bg-primary text-white shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title"><i class="fas fa-info-circle me-2"></i>About This System</h6>
+                        <p class="card-text small">This AI-powered expert system uses rule-based reasoning 
+                        to analyze symptoms and provide early diagnosis for Malaria and Typhoid.</p>
+                    </div>
+                </div>
+
+                <div class="card bg-warning text-dark shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title"><i class="fas fa-exclamation-triangle me-2"></i>Important Note</h6>
+                        <p class="card-text small">This is an educational AI system. Always consult 
+                        qualified medical professionals.</p>
+                    </div>
+                </div>
+
+                <div class="card bg-success text-white shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-title"><i class="fas fa-list-check me-2"></i>Diseases Covered</h6>
+                        <ul class="list-unstyled mb-0 small">
+                            <li><i class="fas fa-check-circle me-2"></i>Malaria</li>
+                            <li><i class="fas fa-check-circle me-2"></i>Typhoid</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reportSection" class="d-none">
+            <div class="card shadow-lg border-top border-primary border-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3><i class="fas fa-file-medical text-primary me-2"></i>Diagnosis Report</h3>
+                        <button onclick="resetForm()" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>New Diagnosis
+                        </button>
+                    </div>
+                    <div class="alert alert-light mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Patient Name:</strong> <span id="reportPatientName"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Date:</strong> <span id="reportDate"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="diagnosisResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">Built with  using Python Flask & AI Expert System | Educational Purposes Only|
+             |Developer: Jaspreet|
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
